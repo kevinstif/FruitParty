@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcadb34bv03oi"]
+
+[ext_resource type="Script" path="res://Shared/Scripts/spawn_fruits.gd" id="1_cpbuh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kqyk5"]
+size = Vector2(288, 20)
+
+[node name="SpawnFruits" type="Area2D"]
+script = ExtResource("1_cpbuh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(144, 10)
+shape = SubResource("RectangleShape2D_kqyk5")
+disabled = true
+
+[node name="Cooldown" type="Timer" parent="."]
+
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

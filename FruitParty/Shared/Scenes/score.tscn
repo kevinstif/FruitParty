@@ -1,0 +1,114 @@
+[gd_scene load_steps=7 format=3 uid="uid://nwb7mwlkkv2l"]
+
+[ext_resource type="Script" path="res://Shared/Scripts/FruitsScore.gd" id="1_n0kxt"]
+[ext_resource type="Script" path="res://Shared/Scripts/score.gd" id="1_ocaea"]
+[ext_resource type="Texture2D" uid="uid://om4jqx7ss8gt" path="res://Shared/Resources/Assets/Objects/apple.png" id="1_ydmd3"]
+[ext_resource type="Texture2D" uid="uid://0a1m3ruar2ww" path="res://Shared/Resources/Assets/Objects/heart.png" id="4_54bud"]
+[ext_resource type="Script" path="res://Shared/Scripts/HeartsScore.gd" id="4_b36py"]
+[ext_resource type="Script" path="res://Shared/Scripts/TimerScore.gd" id="6_a25y7"]
+
+[node name="Score" type="CanvasLayer"]
+script = ExtResource("1_ocaea")
+
+[node name="FruitsScore" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 44.0
+offset_bottom = 44.0
+script = ExtResource("1_n0kxt")
+
+[node name="Panel" type="Panel" parent="FruitsScore"]
+layout_mode = 0
+offset_right = 109.0
+offset_bottom = 38.0
+
+[node name="TextureRect" type="TextureRect" parent="FruitsScore"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_ydmd3")
+
+[node name="Label" type="Label" parent="FruitsScore"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 1.0
+offset_right = 78.0
+offset_bottom = 35.0
+theme_override_font_sizes/font_size = 24
+text = ":"
+
+[node name="Label2" type="Label" parent="FruitsScore"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 2.0
+offset_right = 79.0
+offset_bottom = 36.0
+theme_override_font_sizes/font_size = 24
+text = "0000"
+
+[node name="HeartsScore" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_b36py")
+
+[node name="Panel" type="Panel" parent="HeartsScore"]
+layout_mode = 0
+offset_left = 119.0
+offset_top = 4.0
+offset_right = 188.0
+offset_bottom = 42.0
+
+[node name="Sprite2D" type="Sprite2D" parent="HeartsScore"]
+position = Vector2(139.5, 23.25)
+scale = Vector2(1.9375, 1.84375)
+texture = ExtResource("4_54bud")
+hframes = 3
+
+[node name="Label3" type="Label" parent="HeartsScore"]
+layout_mode = 0
+offset_left = 156.0
+offset_top = 4.0
+offset_right = 164.0
+offset_bottom = 38.0
+theme_override_font_sizes/font_size = 24
+text = ":"
+
+[node name="Label4" type="Label" parent="HeartsScore"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 6.0
+offset_right = 183.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 24
+text = "3"
+
+[node name="TimerScore" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_a25y7")
+
+[node name="Panel" type="Panel" parent="TimerScore"]
+layout_mode = 0
+offset_left = 551.0
+offset_top = 4.0
+offset_right = 620.0
+offset_bottom = 42.0
+
+[node name="Label4" type="Label" parent="TimerScore"]
+offset_left = 565.0
+offset_top = 6.0
+offset_right = 607.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 24
+text = "120"
+
+[node name="Timer" type="Timer" parent="TimerScore"]
+autostart = true
+
+[connection signal="timeout" from="TimerScore/Timer" to="TimerScore" method="_on_timer_timeout"]

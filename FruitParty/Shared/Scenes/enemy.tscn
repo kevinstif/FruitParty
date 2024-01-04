@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://coreptn6kxe7o"]
+
+[ext_resource type="Script" path="res://Shared/Scripts/enemy.gd" id="1_xt6ti"]
+[ext_resource type="Texture2D" uid="uid://byqbwp13inxh7" path="res://Shared/Resources/Assets/Enemies/fire.png" id="2_uv70i"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ytqw5"]
+radius = 6.0
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_xt6ti")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_uv70i")
+hframes = 6
+frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_ytqw5")

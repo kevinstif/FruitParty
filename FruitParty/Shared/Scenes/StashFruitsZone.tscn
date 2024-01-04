@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://li78qcisuol0"]
+
+[ext_resource type="Script" path="res://Shared/Scripts/StashFruitsZone.gd" id="1_8cy41"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kqyk5"]
+size = Vector2(288, 20)
+
+[node name="StashFruitsZone" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_8cy41")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(144, 10)
+shape = SubResource("RectangleShape2D_kqyk5")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

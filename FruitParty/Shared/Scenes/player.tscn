@@ -1,0 +1,92 @@
+[gd_scene load_steps=9 format=3 uid="uid://cqa3rokult77p"]
+
+[ext_resource type="Script" path="res://Shared/Scripts/Player.gd" id="1_hpqv0"]
+[ext_resource type="Texture2D" uid="uid://beequw6iumu70" path="res://Shared/Resources/Assets/Enemies/penguin.png" id="2_018rt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d2tn6"]
+size = Vector2(18, 15)
+
+[sub_resource type="Animation" id="Animation_s0xhm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_sgyas"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_26p8m"]
+resource_name = "walk"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h8ab1"]
+_data = {
+"RESET": SubResource("Animation_s0xhm"),
+"idle": SubResource("Animation_sgyas"),
+"walk": SubResource("Animation_26p8m")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xn86p"]
+radius = 10.4403
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_hpqv0")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_018rt")
+hframes = 4
+
+[node name="PlayerCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 8.5)
+shape = SubResource("RectangleShape2D_d2tn6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h8ab1")
+}
+
+[node name="FruitDetector" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FruitDetector"]
+position = Vector2(-2, 9)
+shape = SubResource("CircleShape2D_xn86p")
+debug_color = Color(0.941176, 0.196078, 0.380392, 0.419608)
+
+[connection signal="body_entered" from="FruitDetector" to="." method="_on_fruit_detector_body_entered"]
