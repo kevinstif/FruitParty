@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -300.0
+@export_file('*.tscn') var change_scene
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -44,6 +45,8 @@ func increment_fruits():
 	fruitsNumber += 1
 	var canvas = get_node("Score")
 	canvas.update_fruits_score(fruitsNumber)
+	if fruitsNumber >= 30:
+		get_tree().change_scene_to_file(change_scene)
 
 func decrement_life():
 	healths -= 1
@@ -57,13 +60,13 @@ func increment_timer(time):
 	canvas.restore_timer(time)
 
 func _on_fruit_detector_body_entered(body):
-	if body.get_type() == 'apple':
-		increment_fruits()
-		body.queue_free()
-	if body.get_type() == 'enemy':
-		decrement_life()
-		body.queue_free()
-	if body.get_type() == "bonus":
-		increment_timer(30)
-		body.queue_free()
-		
+	match body.get_type():
+		'apple': 
+			increment_fruits()
+			body.queue_free()
+		'enemy': 
+			decrement_life()
+			body.queue_free()
+		'bonus': 
+			increment_timer(30)
+			body.queue_free()

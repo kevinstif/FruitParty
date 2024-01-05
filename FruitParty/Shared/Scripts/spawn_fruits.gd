@@ -5,6 +5,9 @@ extends Area2D
 @onready var bonusScene = load("res://Shared/Scenes/bonus_item.tscn")
 
 var spawnEnable = true
+var spawnEnemies = true
+var spawnBonus = false
+var counter = 0
 var random = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,12 +21,12 @@ func spawn():
 	if spawnEnable:
 		$Cooldown.start()
 		spawnEnable = false
-		var selector = random.randi_range(1,100)
-		if selector < 70:
+		var selector = random.randi_range(0,1)
+		if selector == 0:
 			spawn_fruits()
-		elif selector >= 70 and selector < 95:
+		else: 
 			spawn_enemies()
-		else:
+		if spawnBonus: 
 			spawn_bonus()
 
 func spawn_fruits():
@@ -40,6 +43,15 @@ func spawn_bonus():
 	var bonusInstance = bonusScene.instantiate()
 	bonusInstance.position = Vector2(random.randi_range(0,288),0)
 	add_child(bonusInstance)
+	reset_counter()
 
 func _on_cooldown_timeout():
 	spawnEnable = true
+	spawnEnemies = not spawnEnemies
+	counter+=1
+	if counter >= 30:
+		spawnBonus = true
+
+func reset_counter():
+	counter = 0
+	spawnBonus = false

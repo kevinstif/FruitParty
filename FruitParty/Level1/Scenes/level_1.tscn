@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://lgnj8rt8locc"]
+[gd_scene load_steps=5 format=3 uid="uid://lgnj8rt8locc"]
 
 [ext_resource type="PackedScene" uid="uid://de6gwn55llaqv" path="res://Level1/Scenes/map_1.tscn" id="1_jg3si"]
 [ext_resource type="PackedScene" uid="uid://cqa3rokult77p" path="res://Shared/Scenes/player.tscn" id="2_1i0lq"]
 [ext_resource type="PackedScene" uid="uid://dcadb34bv03oi" path="res://Shared/Scenes/spawn_fruits.tscn" id="3_gshid"]
 [ext_resource type="PackedScene" uid="uid://li78qcisuol0" path="res://Shared/Scenes/StashFruitsZone.tscn" id="4_j6m6s"]
-[ext_resource type="PackedScene" uid="uid://nwb7mwlkkv2l" path="res://Shared/Scenes/score.tscn" id="5_n1yps"]
 
 [node name="level1" type="Node2D"]
 position = Vector2(0, 162)
@@ -13,8 +12,7 @@ position = Vector2(0, 162)
 
 [node name="Player" parent="." instance=ExtResource("2_1i0lq")]
 position = Vector2(16, -32)
-
-[node name="Score" parent="Player" instance=ExtResource("5_n1yps")]
+change_scene = "res://level2/Scenes/level_2.tscn"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
